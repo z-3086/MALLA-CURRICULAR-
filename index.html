@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Curricular - Ingeniería Mecánica Eléctrica</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to bottom right, #d0e8f2, #c2d4f6, #e1ccf7);
+      color: #222;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #1a1a40;
+    }
+    .ciclo {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border-radius: 10px;
+      background: #f0f4ff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .curso {
+      margin: 0.5rem 0;
+      padding: 1rem;
+      border: 2px solid #9daaf2;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+    .curso.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .curso input {
+      margin-right: 10px;
+    }
+    .subtext {
+      font-size: 0.9em;
+      color: #666;
+      margin-left: 25px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧭 Malla Curricular - Ingeniería Mecánica Eléctrica</h1>
+  <div id="malla"></div>
+
+  <script>
+    const cursos = {
+      "I CICLO": [
+        { id: "alg", nombre: "ALGORITMOS Y PROGRAMACIÓN", abre: ["estad"] },
+        { id: "ctexto", nombre: "COMPRENSIÓN DE TEXTO Y REDACCIÓN BÁSICA", abre: ["ctexto2"] },
+        { id: "comp", nombre: "DESARROLLO DE COMPETENCIAS DIGITALES" },
+        { id: "estrat", nombre: "ESTRATEGIAS PARA EL APRENDIZAJE AUTÓNOMO" },
+        { id: "fisica1", nombre: "FÍSICA DE LOS CUERPOS RÍGIDOS", abre: ["fisica2"] },
+        { id: "fing", nombre: "FUNDAMENTOS DE INGENIERÍA MECÁNICO – ELÉCTRICO", abre: ["dibujo", "labmed"] },
+        { id: "mat1", nombre: "MATEMÁTICA BÁSICA", abre: ["calc1", "quim"] }
+      ],
+      "II CICLO": [
+        { id: "calc1", nombre: "CÁLCULO DE UNA VARIABLE", abre: ["calc2", "mecest"] },
+        { id: "ctexto2", nombre: "COMPRENSIÓN Y REDACCIÓN DE TEXTOS ACADÉMICOS" },
+        { id: "dibujo", nombre: "DIBUJO TÉCNICO Y GEOMETRÍA DESCRIPTIVA", abre: ["dibing"] },
+        { id: "eco", nombre: "ECOLOGÍA Y DESARROLLO SOSTENIBLE" },
+        { id: "fisica2", nombre: "FÍSICA DE LA MASA Y LA ENERGÍA", abre: ["elecmag", "termo"] },
+        { id: "quim", nombre: "QUÍMICA", abre: ["mating"] }
+      ]
+      // Puedes seguir agregando los demás ciclos de la misma manera
+    };
+
+    const estados = {};
+
+    function renderMalla() {
+      const container = document.getElementById("malla");
+      container.innerHTML = "";
+
+      for (const ciclo in cursos) {
+        const divCiclo = document.createElement("div");
+        divCiclo.className = "ciclo";
+        divCiclo.innerHTML = `<h2>${ciclo}</h2>`;
+
+        cursos[ciclo].forEach((curso) => {
+          const divCurso = document.createElement("div");
+          divCurso.className = "curso";
+          divCurso.id = `curso-${curso.id}`;
+
+          const checked = estados[curso.id] ? "checked" : "";
+          divCurso.innerHTML = `
+            <label>
+              <input type="checkbox" id="check-${curso.id}" ${checked}/> ${curso.nombre}
+            </label>
+          `;
+          if (curso.abre) {
+            divCurso.innerHTML += `<div class="subtext">Abre: ${curso.abre.map(c => `<i>${buscarNombre(c)}</i>`).join(", ")}</div>`;
+          }
+
+          divCiclo.appendChild(divCurso);
+
+          const checkbox = divCurso.querySelector("input");
+          checkbox.addEventListener("change", (e) => {
+            estados[curso.id] = checkbox.checked;
+            actualizarEstado();
+          });
+        });
+        container.appendChild(divCiclo);
+      }
+      actualizarEstado();
+    }
+
+    function buscarNombre(id) {
+      for (const ciclo in cursos) {
+        for (const curso of cursos[ciclo]) {
+          if (curso.id === id) return curso.nombre;
+        }
+      }
+      return id;
+    }
+
+    function actualizarEstado() {
+      for (const ciclo in cursos) {
+        cursos[ciclo].forEach(curso => {
+          const elem = document.getElementById(`curso-${curso.id}`);
+          if (!curso.abre) return;
+          curso.abre.forEach(idDesbloqueado => {
+            const desbloqueado = document.getElementById(`curso-${idDesbloqueado}`);
+            if (desbloqueado) {
+              if (estados[curso.id]) {
+                desbloqueado.classList.remove("disabled");
+              } else {
+                desbloqueado.classList.add("disabled");
+              }
+            }
+          });
+        });
+      }
+    }
+
+    renderMalla();
+  </script>
+</body>
+</html>

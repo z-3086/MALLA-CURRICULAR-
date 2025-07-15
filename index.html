@@ -61,12 +61,65 @@
   </style>
 </head>
 <body>
-  <h1>🛙️ Malla Curricular - Ingeniería Mecánica Eléctrica</h1>
+  <h1>🖙️ Malla Curricular - Ingeniería Mecánica Eléctrica</h1>
   <div id="contenedor"></div>
 
   <script>
-    const dependencias = { /* mismo contenido */ };
-    const cursos = { /* mismo contenido */ };
+    const cursos = {
+      "I CICLO": [
+        "ALGORITMOS Y PROGRAMACIÓN",
+        "COMPRENSIÓN DE TEXTO Y REDACCION BÁSICA",
+        "DESARROLLO DE COMPETENCIAS DIGITALES",
+        "ESTRATEGIAS PARA EL APRENDIZAJE AUTONOMO",
+        "FÍSICA DE LOS CUERPOS RIGIDOS",
+        "FUNDAMENTOS DE INGENIERÍA MECANICO – ELECTRICO",
+        "MATEMÁTICA BASICA"
+      ],
+      "II CICLO": [
+        "CALCULO DE UNA VARIABLE",
+        "COMPRENSIÓN Y REDACCIÓN DE TEXTOS ACADEMICOS",
+        "DIBUJO TECNICO Y GEOMETRÍA DESCRIPTIVA",
+        "ECOLOGIA Y DESARROLLO SOSTENIBLE",
+        "FÍSICA DE LA MASA Y LA ENERGÍA",
+        "QUÍMICA"
+      ],
+      "III CICLO": [
+        "CALCULO DE VARIAS VARIABLES",
+        "DIBUJO DE INGENIERÍA",
+        "ELECTRICIDAD Y MAGNETISMO",
+        "ESTADISTICA Y PROBABILIDADES",
+        "FILOSOFIA",
+        "MECÁNICA ESTÁTICA"
+      ],
+      "IV CICLO": [
+        "ANTROPOLOGÍA FILOSÓFICA",
+        "CIRCUITOS ELECTRICOS",
+        "ECUACIONES DIFERENCIALES",
+        "INGENIERÍA DE LOS MATERIALES",
+        "LABORATORIO DE MEDICIONES ELECTRICAS",
+        "MECÁNICA DINÁMICA"
+      ]
+    };
+
+    const dependencias = {
+      "ALGORITMOS Y PROGRAMACIÓN": ["ESTADISTICA Y PROBABILIDADES"],
+      "COMPRENSIÓN DE TEXTO Y REDACCION BÁSICA": ["COMPRENSIÓN Y REDACCIÓN DE TEXTOS ACADEMICOS"],
+      "FÍSICA DE LOS CUERPOS RIGIDOS": ["FÍSICA DE LA MASA Y LA ENERGÍA"],
+      "FUNDAMENTOS DE INGENIERÍA MECANICO – ELECTRICO": ["DIBUJO TECNICO Y GEOMETRÍA DESCRIPTIVA", "LABORATORIO DE MEDICIONES ELECTRICAS"],
+      "MATEMÁTICA BASICA": ["CALCULO DE UNA VARIABLE", "QUÍMICA"],
+      "CALCULO DE UNA VARIABLE": ["CALCULO DE VARIAS VARIABLES", "MECÁNICA ESTÁTICA"],
+      "DIBUJO TECNICO Y GEOMETRÍA DESCRIPTIVA": ["DIBUJO DE INGENIERÍA"],
+      "FÍSICA DE LA MASA Y LA ENERGÍA": ["ELECTRICIDAD Y MAGNETISMO", "TERMODINÁMICA CLÁSICA"],
+      "QUÍMICA": ["INGENIERÍA DE LOS MATERIALES"],
+      "CALCULO DE VARIAS VARIABLES": ["ECUACIONES DIFERENCIALES"],
+      "ELECTRICIDAD Y MAGNETISMO": ["CIRCUITOS ELECTRICOS"],
+      "ESTADISTICA Y PROBABILIDADES": ["INVESTIGACIÓN EN INGENIERÍA"],
+      "FILOSOFIA": ["ANTROPOLOGÍA FILOSÓFICA"],
+      "MECÁNICA ESTÁTICA": ["MECÁNICA DINÁMICA", "MECÁNICA DE MATERIALES"],
+      "ANTROPOLOGÍA FILOSÓFICA": ["ÉTICA"],
+      "ECUACIONES DIFERENCIALES": ["MÉTODOS NUMÉRICOS PARA INGENIEROS"],
+      "LABORATORIO DE MEDICIONES ELECTRICAS": ["ELECTRONICA DE POTENCIA", "TRANSFORMADORES Y MÁQUINAS DE CORRIENTE DIRECTA"]
+    };
 
     const iconos = [
       "bi-gear", "bi-lightning", "bi-rulers", "bi-journal-code", "bi-bar-chart", "bi-cpu", "bi-diagram-3", "bi-book", "bi-tools"
